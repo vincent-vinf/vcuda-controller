@@ -24,7 +24,7 @@ function build_img() {
     cp ${ROOT}/Dockerfile ${ROOT}/build
     (
       cd ${ROOT}/build
-      docker build ${BUILD_FLAGS:-} --build-arg version=${version} --build-arg commit=${commit} -t ${IMAGE_FILE} .
+      docker build --platform=linux/amd64 ${BUILD_FLAGS:-} --build-arg version=${version} --build-arg commit=${commit} -t ${IMAGE_FILE} .
     )
 }
 

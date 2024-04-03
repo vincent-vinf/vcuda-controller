@@ -1,12 +1,19 @@
 # stage 1
-FROM nvidia/cuda:12.3.2-devel-ubuntu22.04 as build
+FROM nvidia/cuda:12.3.2-devel-ubuntu20.04 as build
 
 RUN apt update && apt install -y --no-install-recommends \
   curl
 
 RUN curl -s -L https://nvidia.github.io/libnvidia-container/gpgkey | apt-key add -
+# 清华大学镜像源
+RUN echo "deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal main restricted universe multiverse" > /etc/apt/sources.list && \
+    echo "deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal-updates main restricted universe multiverse" >> /etc/apt/sources.list && \
+    echo "deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal-backports main restricted universe multiverse" >> /etc/apt/sources.list && \
+    echo "deb http://security.ubuntu.com/ubuntu/ focal-security main restricted universe multiverse" >> /etc/apt/sources.list
 
-RUN apt install -y --no-install-recommends \
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
   cmake libvdpau-dev && \
   rm -rf /var/lib/apt/lists/*
 
