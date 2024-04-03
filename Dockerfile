@@ -1,22 +1,17 @@
 # stage 1
-FROM nvidia/cuda:12.3.2-devel-ubuntu20.04 as build
+FROM nvidia/cuda:12.3.2-devel-centos7 as build
 
-RUN apt update && apt install -y --no-install-recommends \
-  curl
+RUN curl -s -L https://nvidia.github.io/libnvidia-container/stable/rpm/nvidia-container-toolkit.repo | \
+    tee /etc/yum.repos.d/nvidia-container-toolkit.repo
 
-RUN curl -s -L https://nvidia.github.io/libnvidia-container/gpgkey | apt-key add -
-# 清华大学镜像源
-RUN echo "deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal main restricted universe multiverse" > /etc/apt/sources.list && \
-    echo "deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal-updates main restricted universe multiverse" >> /etc/apt/sources.list && \
-    echo "deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal-backports main restricted universe multiverse" >> /etc/apt/sources.list && \
-    echo "deb http://security.ubuntu.com/ubuntu/ focal-security main restricted universe multiverse" >> /etc/apt/sources.list
+RUN curl -o /etc/yum.repos.d/CentOS-Base.repo https://mirrors.aliyun.com/repo/Centos-7.repo
 
-ENV DEBIAN_FRONTEND=noninteractive
+RUN yum install -y libvdpau-devel wget
 
-RUN apt-get update && apt-get install -y --no-install-recommends \
-  cmake libvdpau-dev && \
-  rm -rf /var/lib/apt/lists/*
-
+RUN wget https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-linux-x86_64.tar.gz
+RUN tar xf cmake-3.29.0-linux-x86_64.tar.gz && \
+    mv cmake-3.29.0-linux-x86_64/ /usr/local/cmake-3.29.0
+ENV PATH="/usr/local/cmake-3.29.0/bin:${PATH}"
 COPY cuda-control.tar /tmp
 
 ARG version
