@@ -22,6 +22,7 @@ function build_img() {
     git archive -o ${ROOT}/build/cuda-control.tar --format=tar --prefix=cuda-control/ HEAD
     cp ${ROOT}/vcuda.spec ${ROOT}/build
     cp ${ROOT}/Dockerfile ${ROOT}/build
+    cp ${ROOT}/cmake-3.29.0-linux-x86_64.tar.gz ${ROOT}/build
     (
       cd ${ROOT}/build
       docker build --platform=linux/amd64 ${BUILD_FLAGS:-} --build-arg version=${version} --build-arg commit=${commit} -t ${IMAGE_FILE} .
