@@ -933,7 +933,7 @@ entry_t nvml_library_entry[] = {
     {.name = "nvmlGetExcludedDeviceInfoByIndex"},
     {.name = "nvmlVgpuInstanceGetLicenseInfo"},
     // add for 12.4
-    // {.name = "nvmlDeviceClearFieldValues"},
+    {.name = "nvmlDeviceClearFieldValues"},
     // {.name = "nvmlDeviceGetAdaptiveClockInfoStatus"},
     // {.name = "nvmlDeviceGetC2cModeInfoV"},
     // {.name = "nvmlDeviceGetComputeRunningProcesses_v3"},

@@ -2363,9 +2363,11 @@ typedef enum CUflushGPUDirectRDMAWritesScope_enum {
 
 
 typedef struct CUDA_ARRAY_MEMORY_REQUIREMENTS_st {
-  size_t alignment;
-  size_t size;
-} CUDA_ARRAY_MEMORY_REQUIREMENTS;
+    size_t size;                /**< Total required memory size */
+    size_t alignment;           /**< alignment requirement */
+    unsigned int reserved[4];
+} CUDA_ARRAY_MEMORY_REQUIREMENTS_v1;
+typedef CUDA_ARRAY_MEMORY_REQUIREMENTS_v1 CUDA_ARRAY_MEMORY_REQUIREMENTS;
 
 #ifdef __cplusplus
 }

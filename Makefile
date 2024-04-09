@@ -5,3 +5,6 @@ image:
 
 push: image
 	docker push $(IMAGE_NAME)
+
+dev-image:
+	docker build -t clion/remote-cpp-env:0.5 -f dev.dockerfile .

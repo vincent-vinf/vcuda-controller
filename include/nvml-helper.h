@@ -554,7 +554,7 @@ typedef enum {
   NVML_ENTRY_ENUM(nvmlGetExcludedDeviceInfoByIndex),
   NVML_ENTRY_ENUM(nvmlVgpuInstanceGetLicenseInfo),
   // add for cuda 12.4
-  // NVML_ENTRY_ENUM(nvmlDeviceClearFieldValues),
+  NVML_ENTRY_ENUM(nvmlDeviceClearFieldValues),
   // NVML_ENTRY_ENUM(nvmlDeviceGetAdaptiveClockInfoStatus),
   // NVML_ENTRY_ENUM(nvmlDeviceGetC2cModeInfoV),
   // NVML_ENTRY_ENUM(nvmlDeviceGetComputeRunningProcesses_v3),
